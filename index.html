@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Snake Water Gun</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f9f9f9;
+    }
+    h1 {
+      background: #333;
+      color: white;
+      padding: 10px;
+    }
+    .choices {
+      display: flex;
+      justify-content: center;
+      margin: 20px;
+    }
+    .choice {
+      margin: 15px;
+      cursor: pointer;
+      border-radius: 50%;
+      padding: 10px;
+      transition: transform 0.2s;
+    }
+    .choice:hover {
+      transform: scale(1.1);
+    }
+    .choice img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #333;
+    }
+    .score-board {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin: 20px;
+      font-size: 20px;
+    }
+    .score {
+      text-align: center;
+    }
+    .message-box {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 22px;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-top: 15px;
+      color: white;
+    }
+    .win {
+      background-color: green;
+    }
+    .lose {
+      background-color: red;
+    }
+    .draw {
+      background-color: goldenrod;
+    }
+  </style>
+</head>
+<body>
+  <h1>SNAKE WATER GUN</h1>
+
+  <div class="choices">
+    <div class="choice" id="snake">
+      <img src="snake.png" alt="Snake">
+    </div>
+    <div class="choice" id="water">
+      <img src="water.png" alt="Water">
+    </div>
+    <div class="choice" id="gun">
+      <img src="gun.png" alt="Gun">
+    </div>
+  </div>
+
+  <div class="score-board">
+    <div class="score">
+      <span id="user-score">0</span><br>YOU
+    </div>
+    <div class="score">
+      <span id="comp-score">0</span><br>COMP
+    </div>
+  </div>
+
+  <div id="result" class="message-box draw">Make your move!</div>
+
+  <script>
+    const choices = document.querySelectorAll('.choice');
+    const result = document.getElementById('result');
+    const userScore_span = document.getElementById('user-score');
+    const compScore_span = document.getElementById('comp-score');
+
+    let userScore = 0;
+    let compScore = 0;
+
+    const compChoice = () => {
+      const options = ['snake', 'water', 'gun'];
+      return options[Math.floor(Math.random() * 3)];
+    };
+
+    const win = () => {
+      userScore++;
+      userScore_span.textContent = userScore;
+      result.textContent = "You win!";
+      result.className = "message-box win";
+    };
+
+    const lose = () => {
+      compScore++;
+      compScore_span.textContent = compScore;
+      result.textContent = "Computer wins!";
+      result.className = "message-box lose";
+    };
+
+    const draw = () => {
+      result.textContent = "It's a draw!";
+      result.className = "message-box draw";
+    };
+
+    const game = (userChoice) => {
+      const computerChoice = compChoice();
+      if (userChoice === computerChoice) {
+        draw();
+      } else if (
+        (userChoice === "snake" && computerChoice === "water") ||
+        (userChoice === "water" && computerChoice === "gun") ||
+        (userChoice === "gun" && computerChoice === "snake")
+      ) {
+        win();
+      } else {
+        lose();
+      }
+    };
+
+    choices.forEach(choice => {
+      choice.addEventListener('click', () => {
+        const userChoice = choice.id;
+        game(userChoice);
+      });
+    });
+  </script>
+</body>
+</html>
