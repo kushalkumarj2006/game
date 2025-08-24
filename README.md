@@ -1,7 +1,5 @@
 # 🎮 Snake Water Gun - Futuristic Game
 
-![Game Banner](https://via.placeholder.com/800x200/0D1117/FFFFFF/?text=Snake+Water+Gun+Futuristic+Edition)
-
 A cutting-edge browser-based implementation of the classic "Snake Water Gun" game with futuristic UI elements and responsive design. Experience this timeless game reimagined for the modern web era.
 
 ## 🌐 Live Demo
